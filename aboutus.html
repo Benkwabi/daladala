@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Dalali Wa Mkoa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            opacity: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        
+        .about-intro {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .mission-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .mission-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .mission-icon {
+            background: #e74c3c;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+        
+        .team-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 5px solid #f1f1f1;
+        }
+        
+        .values-section {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 40px;
+            border-radius: 10px;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .value-item h3 {
+            color: #f39c12;
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 100px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="pageHeader">
+        <h1>Your Trusted Partner in Tanzanian Real Estate</h1>
+        <p>For over 15 years, Dalali Wa Mkoa has been helping individuals and businesses find their perfect spaces</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn" id="backButton">← Back to Home</a>
+        
+        <div class="about-intro" id="aboutIntro">
+            <h2>Our Story</h2>
+            <p>Founded in 2008, Dalali Wa Mkoa has grown from a small local agency to one of Tanzania's most respected real estate partners. We don't just sell properties—we build relationships and deliver dreams.</p>
+            <p>What sets us apart is our commitment to integrity. We prioritize transparency, offering honest valuations and clear processes—because your trust is our most valued asset.</p>
+        </div>
+        
+        <div class="mission-section">
+            <div class="mission-card" id="missionCard1">
+                <div class="mission-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>End-to-End Solutions</h3>
+                <p>From vacant land to luxury villas, rental apartments to commercial spaces—we cover every real estate need with comprehensive services tailored to your requirements.</p>
+            </div>
+            
+            <div class="mission-card" id="missionCard2">
+                <div class="mission-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Local Market Masters</h3>
+                <p>Our team's unmatched knowledge of Tanzanian property trends ensures you get the best deals and advice. We know every neighborhood like the back of our hand.</p>
+            </div>
+            
+            <div class="mission-card" id="missionCard3">
+                <div class="mission-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Relationship Focused</h3>
+                <p>We measure our success by your satisfaction. Our clients become our partners, and we're committed to your long-term real estate success in Tanzania.</p>
+            </div>
+        </div>
+        
+       
+        
+        <div class="values-section" id="valuesSection">
+            <h2 style="color: white;">Our Core Values</h2>
+            <p style="text-align: center;">These principles guide every interaction and decision we make</p>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <h3>Integrity</h3>
+                    <p>We believe in doing business the right way, with honesty and transparency at every step.</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Expertise</h3>
+                    <p>Our deep market knowledge ensures you make informed decisions with confidence.</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Commitment</h3>
+                    <p>We're dedicated to finding solutions that truly meet your needs and exceed expectations.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section" id="ctaSection">
+            <h2>Ready to Find Your Perfect Property?</h2>
+            <p>Let's discuss how we can help you achieve your real estate goals in Tanzania.</p>
+            <a href="contact.html" class="cta-button">Contact Our Team</a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" id="whatsappButton" onclick="window.open('https://wa.me/255786036444', '_blank')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script>
+        // Animation timeline
+        document.addEventListener('DOMContentLoaded', function() {
+            const tl = gsap.timeline();
+            
+            tl.to("#pageHeader", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            });
+            
+            tl.to("#backButton", {
+                duration: 0.6,
+                opacity: 1,
+                y: 0,
+                ease: "back.out(1.7)"
+            }, "-=0.4");
+            
+            tl.to("#aboutIntro", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.3");
+            
+            tl.to("#missionCard1", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#missionCard2", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.6");
+            
+            tl.to("#missionCard3", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.6");
+            
+            tl.to("#teamSection", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#valuesSection", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#ctaSection", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#whatsappButton", {
+                duration: 0.5,
+                opacity: 1,
+                scale: 1,
+                ease: "back.out(1.7)"
+            }, "-=0.3");
+        });
+    </script>
+</body>
+</html>

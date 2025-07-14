@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joint Venture Opportunities</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        
+        .jv-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .opportunity-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .opportunity-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .opportunity-info {
+            padding: 25px;
+        }
+        
+        .sector-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .investment {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        
+        .location {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .location i {
+            margin-right: 8px;
+        }
+        
+        .benefits-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 8px;
+        }
+        
+        .contact-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+        
+        .contact-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .contact-btn i {
+            margin-right: 8px;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Form Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .submit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Joint Venture Opportunities</h1>
+        <p>Strategic partnerships for mutual growth and success</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <div class="jv-intro">
+            <h2>Explore Partnership Opportunities</h2>
+            <p>We're seeking strategic partners to collaborate on exciting projects across multiple sectors. Our joint venture model offers shared resources, expertise, and profits while mitigating risks. Below are our current opportunities for partnership.</p>
+            <p>Each opportunity includes detailed information about the project scope, required investment, expected returns, and partnership terms. Contact us to discuss how we can work together for mutual success.</p>
+        </div>
+        
+        <div class="opportunities-grid" id="opportunitiesContainer">
+            <!-- Real Estate Development -->
+            <div class="opportunity-card" data-delay="0.1">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Real Estate Development" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Real Estate</span>
+                    <h3>Mixed-Use Development Project</h3>
+                    <p>Prime location commercial/residential development with projected 25% ROI over 3 years.</p>
+                    
+                    <div class="investment">Investment: $2M - $5M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>Prime commercial location with high demand</li>
+                        <li>Approved building permits secured</li>
+                        <li>Pre-leasing commitments already in place</li>
+                        <li>50/50 profit sharing structure</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Mixed-Use Development Project')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Manufacturing Facility -->
+            <div class="opportunity-card" data-delay="0.2">
+                <img src="https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Manufacturing Facility" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Manufacturing</span>
+                    <h3>Building Materials Factory</h3>
+                    <p>State-of-the-art production facility for construction materials serving East African market.</p>
+                    
+                    <div class="investment">Investment: $1.5M - $3M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Arusha, Tanzania
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>Growing regional construction market</li>
+                        <li>Government incentives available</li>
+                        <li>Existing distribution network in place</li>
+                        <li>Flexible partnership terms available</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Building Materials Factory')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Renewable Energy -->
+            <div class="opportunity-card" data-delay="0.3">
+                <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Solar Farm" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Energy</span>
+                    <h3>Solar Power Plant</h3>
+                    <p>10MW solar farm with 20-year PPA with national utility company.</p>
+                    
+                    <div class="investment">Investment: $8M - $12M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dodoma, Tanzania
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>Guaranteed power purchase agreement</li>
+                        <li>Tax incentives and government support</li>
+                        <li>Scalable to 50MW in future phases</li>
+                        <li>60/40 equity split available</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Solar Power Plant')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Agriculture -->
+            <div class="opportunity-card" data-delay="0.4">
+                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Agricultural Project" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Agriculture</span>
+                    <h3>Commercial Avocado Farm</h3>
+                    <p>500-hectare avocado plantation with processing facility for export markets.</p>
+                    
+                    <div class="investment">Investment: $1M - $2M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Mbeya, Tanzania
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>High global demand for avocados</li>
+                        <li>Existing EU export certification</li>
+                        <li>Irrigation infrastructure in place</li>
+                        <li>70/30 profit sharing for first 3 years</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Commercial Avocado Farm')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hospitality -->
+            <div class="opportunity-card" data-delay="0.5">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Beach Resort" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Tourism</span>
+                    <h3>Beachfront Eco-Resort</h3>
+                    <p>Luxury 50-room sustainable resort on Zanzibar's best beach.</p>
+                    
+                    <div class="investment">Investment: $3M - $5M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Zanzibar, Tanzania
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>Prime beachfront location</li>
+                        <li>All permits and approvals secured</li>
+                        <li>Management contract with international brand</li>
+                        <li>Various partnership structures available</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Beachfront Eco-Resort')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Technology -->
+            <div class="opportunity-card" data-delay="0.6">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tech Startup" class="opportunity-image">
+                <div class="opportunity-info">
+                    <span class="sector-tag">Technology</span>
+                    <h3>Fintech Platform Development</h3>
+                    <p>Mobile payment solution for East African market with 100,000 pre-registered users.</p>
+                    
+                    <div class="investment">Investment: $500K - $1.5M</div>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Nairobi, Kenya
+                    </div>
+                    
+                    <ul class="benefits-list">
+                        <li>Proven business model in other markets</li>
+                        <li>Existing beta version with positive feedback</li>
+                        <li>Central Bank approval in progress</li>
+                        <li>Equity or convertible note options</li>
+                    </ul>
+                    
+                    <button class="contact-btn" onclick="openModal('Fintech Platform Development')">
+                        <i class="fas fa-handshake"></i> Express Interest
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" onclick="window.open('https://wa.me/255786036444', '_blank')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Express Interest</h2>
+            <form id="jvContactForm">
+                <input type="hidden" id="opportunityName" name="opportunityName">
+                
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="investment">Potential Investment Range</label>
+                    <select id="investment" name="investment">
+                        <option value="">Select range</option>
+                        <option value="Under $100K">Under $100K</option>
+                        <option value="$100K - $500K">$100K - $500K</option>
+                        <option value="$500K - $1M">$500K - $1M</option>
+                        <option value="$1M - $5M">$1M - $5M</option>
+                        <option value="Over $5M">Over $5M</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Proposal or Questions</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Interest
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Animation for opportunity cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const opportunities = gsap.utils.toArray('.opportunity-card');
+            
+            opportunities.forEach(opportunity => {
+                gsap.to(opportunity, {
+                    duration: 0.8,
+                    opacity: 1,
+                    y: 0,
+                    delay: parseFloat(opportunity.getAttribute('data-delay')),
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Modal functions
+        function openModal(opportunityName) {
+            document.getElementById('opportunityName').value = opportunityName;
+            document.getElementById('modalTitle').textContent = `Interest in: ${opportunityName}`;
+            document.getElementById('contactModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Form submission
+        document.getElementById('jvContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const opportunityName = document.getElementById('opportunityName').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Format WhatsApp message
+            const message = `New JV Interest: ${opportunityName}%0A%0A` +
+                           `Name: ${name}%0A` +
+                           `Email: ${email}%0A` +
+                           `Phone: ${phone}%0A` +
+                           `Company: ${document.getElementById('company').value || 'N/A'}%0A` +
+                           `Investment Range: ${document.getElementById('investment').value || 'Not specified'}%0A%0A` +
+                           `Message:%0A${document.getElementById('message').value || 'No additional message'}`;
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/255786036444?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // Close modal and reset form
+            closeModal();
+            this.reset();
+            
+            // Optional: Show confirmation
+            alert('Thank you for your interest! We have opened WhatsApp for you to send your details.');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houses Properties</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .price {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 8px 0;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+        .location {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        .specs {
+            color: #34495e;
+            font-size: 0.9rem;
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        .product-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .product-features span {
+            background: #f1f1f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .call-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .call-btn:hover {
+            background-color: #27ae60;
+        }
+        .call-btn i {
+            margin-right: 8px;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Beautiful Houses</h1>
+        <p>Find your dream home from our exclusive collection</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Categories</a>
+        
+        <div class="products-grid" id="productsContainer">
+            <!-- House 1 -->
+            <div class="product-card" data-delay="0.1">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Modern Villa" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Villa</span>
+                    <h3>Modern Villa</h3>
+                    <div class="specs">4 Bedrooms | 3 Bathrooms | 2200 sqft</div>
+                    <div class="price">$450,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>Swimming Pool</span>
+                        <span>Garage</span>
+                        <span>Garden</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- House 2 -->
+            <div class="product-card" data-delay="0.2">
+                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Suburban Home" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Family Home</span>
+                    <h3>Suburban Home</h3>
+                    <div class="specs">3 Bedrooms | 2 Bathrooms | 1800 sqft</div>
+                    <div class="price">$320,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>Backyard</span>
+                        <span>Modern Kitchen</span>
+                        <span>Quiet Neighborhood</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- House 3 -->
+            <div class="product-card" data-delay="0.3">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Luxury Mansion" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Luxury</span>
+                    <h3>Luxury Mansion</h3>
+                    <div class="specs">6 Bedrooms | 5 Bathrooms | 5500 sqft</div>
+                    <div class="price">$1,250,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>Home Theater</span>
+                        <span>Wine Cellar</span>
+                        <span>Smart Home</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- House 4 -->
+            <div class="product-card" data-delay="0.4">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Countryside Cottage" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Cottage</span>
+                    <h3>Countryside Cottage</h3>
+                    <div class="specs">2 Bedrooms | 1 Bathroom | 1200 sqft</div>
+                    <div class="price">$210,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>Scenic Views</span>
+                        <span>Fireplace</span>
+                        <span>Private Land</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- House 5 -->
+            <div class="product-card" data-delay="0.5">
+                <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Contemporary Apartment" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Apartment</span>
+                    <h3>Contemporary Apartment</h3>
+                    <div class="specs">2 Bedrooms | 2 Bathrooms | 1500 sqft</div>
+                    <div class="price">$275,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>City Views</span>
+                        <span>Balcony</span>
+                        <span>Concierge</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+            
+            <!-- House 6 -->
+            <div class="product-card" data-delay="0.6">
+                <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Beachfront Property" class="product-image">
+                <div class="product-info">
+                    <span class="category-tag">Beach House</span>
+                    <h3>Beachfront Property</h3>
+                    <div class="specs">3 Bedrooms | 2 Bathrooms | 2000 sqft</div>
+                    <div class="price">$650,000</div>
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i> Dar es Salaam Street
+                    </div>
+                    <div class="product-features">
+                        <span>Ocean View</span>
+                        <span>Private Beach</span>
+                        <span>Outdoor Shower</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call for Viewing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" onclick="toggleChat()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const products = gsap.utils.toArray('.product-card');
+            
+            products.forEach(product => {
+                gsap.to(product, {
+                    duration: 0.8,
+                    opacity: 1,
+                    y: 0,
+                    delay: parseFloat(product.getAttribute('data-delay')),
+                    ease: 'power2.out'
+                });
+                
+                product.addEventListener('click', function() {
+                    gsap.to(product, {
+                        duration: 0.3,
+                        scale: 0.95,
+                        boxShadow: '0 0 0 rgba(0,0,0,0.1)',
+                        ease: 'power2.in',
+                        onComplete: () => {
+                            // Here you would redirect to the individual property details page
+                            alert('Redirecting to property details page');
+                        }
+                    });
+                });
+            });
+        });
+
+        // WhatsApp Functionality - Direct Chat
+        function toggleChat() {
+            window.open('https://wa.me/+255786036444', '_blank');
+        }
+    </script>
+</body>
+</html>

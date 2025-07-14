@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire a Constructor - Construction Request Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:hover {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .disclaimer {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Construction Service Request</h1>
+        <form id="constructionForm">
+            <div class="form-group">
+                <label for="name">Full Name <span class="required">*</span></label>
+                <input type="text" id="name" required placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" required placeholder="255123456789">
+            </div>
+            
+            <div class="form-group">
+                <label for="projectType">Project Type <span class="required">*</span></label>
+                <select id="projectType" required>
+                    <option value="" disabled selected>Select project type</option>
+                    <option value="New Construction">New Construction</option>
+                    <option value="Renovation">Renovation</option>
+                    <option value="Repair">Repair</option>
+                    <option value="Extension">Extension</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="propertyType">Property Type <span class="required">*</span></label>
+                <select id="propertyType" required>
+                    <option value="" disabled selected>Select property type</option>
+                    <option value="Residential House">Residential House</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Commercial Building">Commercial Building</option>
+                    <option value="Land Development">Land Development</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="location">Location (District/Area) <span class="required">*</span></label>
+                <input type="text" id="location" required placeholder="e.g., Dar es Salaam, Kinondoni">
+            </div>
+            
+            <div class="form-group">
+                <label for="budget">Estimated Budget (TZS)</label>
+                <input type="number" id="budget" placeholder="Enter amount in Tanzanian Shillings">
+            </div>
+            
+            <div class="form-group">
+                <label for="timeline">Preferred Timeline</label>
+                <select id="timeline">
+                    <option value="" selected>No specific timeline</option>
+                    <option value="Immediately">Immediately</option>
+                    <option value="Within 1 month">Within 1 month</option>
+                    <option value="1-3 months">1-3 months</option>
+                    <option value="3-6 months">3-6 months</option>
+                    <option value="6+ months">6+ months</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="details">Project Details</label>
+                <textarea id="details" rows="4" placeholder="Describe your project in detail..."></textarea>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                <span class="whatsapp-icon">📱</span> Send via WhatsApp
+            </button>
+        </form>
+        
+        <p class="disclaimer">By submitting this form, you agree to be contacted by our construction team via WhatsApp.</p>
+    </div>
+
+    <script>
+        document.getElementById('constructionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const projectType = document.getElementById('projectType').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const location = document.getElementById('location').value;
+            const budget = document.getElementById('budget').value;
+            const timeline = document.getElementById('timeline').value;
+            const details = document.getElementById('details').value;
+            
+            // Format the WhatsApp message
+            let message = `*NEW CONSTRUCTION REQUEST*%0A%0A`;
+            message += `*Name:* ${name}%0A`;
+            message += `*Phone:* ${phone}%0A`;
+            message += `*Project Type:* ${projectType}%0A`;
+            message += `*Property Type:* ${propertyType}%0A`;
+            message += `*Location:* ${location}%0A`;
+            
+            if (budget) {
+                message += `*Budget:* TZS ${Number(budget).toLocaleString()}%0A`;
+            }
+            
+            if (timeline) {
+                message += `*Timeline:* ${timeline}%0A`;
+            }
+            
+            if (details) {
+                message += `%0A*Project Details:*%0A${details}%0A`;
+            }
+            
+            // Encode the message for URL
+            const encodedMessage = encodeURIComponent(message).replace(/'/g, "%27").replace(/"/g, "%22");
+            
+            // Open WhatsApp with the pre-filled message
+            window.open(`https://wa.me/255786036444?text=${encodedMessage}`, '_blank');
+            
+            // Optional: Reset the form after submission
+            // document.getElementById('constructionForm').reset();
+        });
+    </script>
+</body>
+</html>

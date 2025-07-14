@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            opacity: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .contact-info {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+        
+        .contact-details p {
+            margin: 0;
+            color: #7f8c8d;
+        }
+        
+        .contact-details a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-details a:hover {
+            color: #2980b9;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .submit-btn i {
+            margin-right: 10px;
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .business-hours {
+            margin-top: 30px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .business-hours h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .hours-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .hours-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .hours-table td:first-child {
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="pageHeader">
+        <h1>Contact Us</h1>
+        <p>Get in touch with our team for any inquiries or support</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn" id="backButton">← Back to Home</a>
+        
+        <div class="contact-container">
+            <div class="contact-info" id="contactInfo">
+                <h2>Our Contact Information</h2>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+255786036444">+255 786 036 444</a></p>
+                        <p>Monday - Friday, 8:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/255786036444" target="_blank">Chat with us</a></p>
+                        <p>24/7 support via WhatsApp</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:info@yourcompany.com">info@dalaliwamkoa.com</a></p>
+                        <p>Response within 24 hours</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Address</h3>
+                                               <p>Dar es Salaam, Tanzania</p>
+                    </div>
+                </div>
+                
+                <div class="map-container" id="mapContainer">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.964041819564!2d39.20807081426676!3d-6.597577164736724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c5a9b6795f6a1%3A0x8d7c5a9b6795f6a1!2sDar%20es%20Salaam!5e0!3m2!1sen!2stz!4v1620000000000!5m2!1sen!2stz" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <div class="contact-form" id="contactForm">
+                <h2>Send Us a Message</h2>
+                <form id="contactUsForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Product Information">Product Information</option>
+                            <option value="Order Support">Order Support</option>
+                            <option value="Partnership">Partnership Opportunity</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="business-hours" id="businessHours">
+            
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" id="whatsappButton" onclick="window.open('https://wa.me/255786036444', '_blank')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script>
+        // Animation timeline
+        document.addEventListener('DOMContentLoaded', function() {
+            const tl = gsap.timeline();
+            
+            tl.to("#pageHeader", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            });
+            
+            tl.to("#backButton", {
+                duration: 0.6,
+                opacity: 1,
+                y: 0,
+                ease: "back.out(1.7)"
+            }, "-=0.4");
+            
+            tl.to("#contactInfo", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.3");
+            
+            tl.to("#contactForm", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.6");
+            
+            tl.to("#mapContainer", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#businessHours", {
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out"
+            }, "-=0.4");
+            
+            tl.to("#whatsappButton", {
+                duration: 0.5,
+                opacity: 1,
+                scale: 1,
+                ease: "back.out(1.7)"
+            }, "-=0.3");
+        });
+
+        // Form submission to WhatsApp
+        document.getElementById('contactUsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value || 'Not provided';
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Format WhatsApp message
+            const whatsappMessage = `*New Contact Form Submission*%0A%0A` +
+                                   `*Name:* ${name}%0A` +
+                                   `*Email:* ${email}%0A` +
+                                   `*Phone:* ${phone}%0A` +
+                                   `*Subject:* ${subject}%0A%0A` +
+                                   `*Message:*%0A${message}`;
+            
+            // Encode for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/255786036444?text=${encodedMessage}`, '_blank');
+            
+            // Optional: Reset form after submission
+            // this.reset();
+            
+            // Optional: Show confirmation
+            alert('Thank you for your message! We have opened WhatsApp for you to send your inquiry.');
+        });
+    </script>
+</body>
+</html>

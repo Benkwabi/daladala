@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plots Properties - Dar es Salaam</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .price {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #2980b9;
+        }
+        .plot-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .plot-features span {
+            background: #f1f1f1;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .location {
+            color: #3498db;
+            font-weight: bold;
+        }
+        .call-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .call-btn:hover {
+            background-color: #27ae60;
+        }
+        .call-btn i {
+            margin-right: 8px;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Prime Plots & Land in Dar es Salaam</h1>
+        <p>Invest in premium plots across the best streets of Dar es Salaam</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Categories</a>
+        
+        <div class="products-grid" id="productsContainer">
+            <!-- Plot 1 -->
+            <div class="product-card" data-delay="0.1">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Ocean Road Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Ocean Road Plot</h3>
+                    <p>Prime beachfront location with stunning Indian Ocean views</p>
+                    <p class="price">TZS 850,000,000</p>
+                    <p class="location">Ocean Road, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>2000 sqm</span>
+                        <span>Waterfront</span>
+                        <span>Commercial</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 2 -->
+            <div class="product-card" data-delay="0.2">
+                <img src="https://images.unsplash.com/photo-1580041065738-e720237bcd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Ali Hassan Mwinyi Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Ali Hassan Mwinyi Plot</h3>
+                    <p>Premium commercial plot in the city's business corridor</p>
+                    <p class="price">TZS 650,000,000</p>
+                    <p class="location">Ali Hassan Mwinyi Road, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>1500 sqm</span>
+                        <span>Main Road</span>
+                        <span>Approved Plans</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 3 -->
+            <div class="product-card" data-delay="0.3">
+                <img src="https://images.unsplash.com/photo-1582408921715-18e7806365c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Mikocheni Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Mikocheni Plot</h3>
+                    <p>Residential plot in upscale neighborhood</p>
+                    <p class="price">TZS 320,000,000</p>
+                    <p class="location">Mikocheni Street, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>1000 sqm</span>
+                        <span>Quiet Area</span>
+                        <span>Gated Community</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 4 -->
+            <div class="product-card" data-delay="0.4">
+                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Kariakoo Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Kariakoo Plot</h3>
+                    <p>High-density commercial plot in bustling market area</p>
+                    <p class="price">TZS 1,200,000,000</p>
+                    <p class="location">Kariakoo Street, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>800 sqm</span>
+                        <span>Central Location</span>
+                        <span>Mixed Use</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 5 -->
+            <div class="product-card" data-delay="0.5">
+                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Msasani Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Msasani Plot</h3>
+                    <p>Exclusive residential plot near diplomatic zone</p>
+                    <p class="price">TZS 450,000,000</p>
+                    <p class="location">Msasani Peninsula, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>1200 sqm</span>
+                        <span>Hilltop View</span>
+                        <span>Secure Area</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 6 -->
+            <div class="product-card" data-delay="0.6">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Bagamoyo Road Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Bagamoyo Road Plot</h3>
+                    <p>Strategic plot along major highway with commercial potential</p>
+                    <p class="price">TZS 380,000,000</p>
+                    <p class="location">Bagamoyo Road, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>2500 sqm</span>
+                        <span>Highway Frontage</span>
+                        <span>Industrial Zoning</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 7 -->
+            <div class="product-card" data-delay="0.7">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Oysterbay Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Oysterbay Plot</h3>
+                    <p>Luxury beachfront plot in most exclusive neighborhood</p>
+                    <p class="price">TZS 1,500,000,000</p>
+                    <p class="location">Oysterbay, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>1800 sqm</span>
+                        <span>Private Beach</span>
+                        <span>Upscale Area</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 8 -->
+            <div class="product-card" data-delay="0.8">
+                <img src="https://images.unsplash.com/photo-1502673530728-f79b4cab31b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Kunduchi Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Kunduchi Plot</h3>
+                    <p>Large plot near beach resorts with tourism potential</p>
+                    <p class="price">TZS 600,000,000</p>
+                    <p class="location">Kunduchi, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>3000 sqm</span>
+                        <span>Near Hotels</span>
+                        <span>Tourism Zoning</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 9 -->
+            <div class="product-card" data-delay="0.9">
+                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tabata Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Tabata Plot</h3>
+                    <p>Affordable residential plot in developing area</p>
+                    <p class="price">TZS 180,000,000</p>
+                    <p class="location">Tabata, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>1000 sqm</span>
+                        <span>Residential</span>
+                        <span>Good Access</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Plot 10 -->
+            <div class="product-card" data-delay="1.0">
+                <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Mbezi Beach Plot" class="product-image">
+                <div class="product-info">
+                    <h3>Mbezi Beach Plot</h3>
+                    <p>Spacious plot in fast-growing northern suburbs</p>
+                    <p class="price">TZS 250,000,000</p>
+                    <p class="location">Mbezi Beach, Dar es Salaam</p>
+                    <div class="plot-features">
+                        <span>2000 sqm</span>
+                        <span>Mixed Use</span>
+                        <span>Development Area</span>
+                    </div>
+                    <button class="call-btn" onclick="window.location.href='tel:+255786036444'">
+                        <i class="fas fa-phone"></i> Call Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-btn" onclick="toggleChat()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const products = gsap.utils.toArray('.product-card');
+            
+            products.forEach(product => {
+                gsap.to(product, {
+                    duration: 0.8,
+                    opacity: 1,
+                    y: 0,
+                    delay: parseFloat(product.getAttribute('data-delay')),
+                    ease: 'power2.out'
+                });
+                
+                product.addEventListener('click', function() {
+                    gsap.to(product, {
+                        duration: 0.3,
+                        scale: 0.95,
+                        boxShadow: '0 0 0 rgba(0,0,0,0.1)',
+                        ease: 'power2.in',
+                        onComplete: () => {
+                            // Here you would redirect to the individual plot details page
+                            alert('Redirecting to plot details page');
+                        }
+                    });
+                });
+            });
+        });
+
+        // WhatsApp Functionality - Direct Chat
+        function toggleChat() {
+            window.open('https://wa.me/255786036444', '_blank');
+        }
+    </script>
+</body>
+</html>

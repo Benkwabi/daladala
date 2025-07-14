@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Categories</title>
+    <!-- Include GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            opacity: 0; /* Start invisible for animation */
+            transform: translateY(20px);
+        }
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            opacity: 0; /* Start invisible for animation */
+        }
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        .category-card:hover {
+            transform: scale(1.03) !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+        .category-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+        }
+        .category-name {
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            background: linear-gradient(to right, transparent 50%, #f8f8f8 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            transition: all 0.3s ease;
+        }
+        .category-card:hover .category-name {
+            background-position: left bottom;
+            color: #0066cc;
+        }
+        /* Pulse animation for attention */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="animate-title">Browse Our Property Categories</h1>
+    
+    <div class="categories-container animate-grid">
+        <div class="category-card" onclick="redirectTo('houses.html')" data-delay="0.1">
+            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Houses" class="category-image">
+            <div class="category-name">HOUSES 🏡</div>
+        </div>
+        
+        <div class="category-card" onclick="redirectTo('properties.html')" data-delay="0.2">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Properties" class="category-image">
+            <div class="category-name">PROPERTIES</div>
+        </div>
+        
+        <div class="category-card" onclick="redirectTo('land.html')" data-delay="0.3">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Plots" class="category-image">
+            <div class="category-name">PLOTS,LAND & FARMS</div>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate title
+            gsap.to('.animate-title', {
+                duration: 1,
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out'
+            });
+            
+            // Animate grid container
+            gsap.to('.animate-grid', {
+                duration: 0.5,
+                opacity: 1,
+                delay: 0.3,
+                ease: 'power1.out'
+            });
+            
+            // Animate each card with stagger
+            const cards = gsap.utils.toArray('.category-card');
+            cards.forEach(card => {
+                gsap.to(card, {
+                    duration: 0.8,
+                    opacity: 1,
+                    scale: 1,
+                    delay: parseFloat(card.getAttribute('data-delay')),
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+            
+            // Add click animation
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    
+                    // Click animation
+                    gsap.to(this, {
+                        duration: 0.3,
+                        scale: 0.95,
+                        boxShadow: '0 0 0 rgba(0,0,0,0.1)',
+                        ease: 'power2.in',
+                        onComplete: () => {
+                            window.location.href = target;
+                        }
+                    });
+                });
+            });
+        });
+        
+        // Separate redirect function for better handling
+        function redirectTo(page) {
+            // This is handled in the click animation above
+        }
+        
+        // Add subtle floating animation to cards
+        cards.forEach((card, index) => {
+            gsap.to(card, {
+                duration: 2 + Math.random(),
+                y: -5 + Math.random() * 10,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                delay: index * 0.1
+            });
+        });
+    </script>
+</body>
+</html>
